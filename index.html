@@ -1,0 +1,235 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>5C APIs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body data-spy="scroll">
+
+    <div id="mynavbar" class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">5C APIs</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="#courses">Courses</a></li>
+              <li ><a href="#dining">Dining</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+    <div id="courses" style="padding-top:00px">
+
+    <h1>5C APIs</h1>
+    <h3>5C Courses Public API</h3>
+    <p>This is an API which allows you to query for all courses offered at the Claremont Colleges (5C).  The base URL is:</p>
+    <pre>http://course-api.herokuapp.com/$DEPARTMENT_ID/$COURSE_ID/$SECTION_ID</pre>
+    <p>The return format is JSON. Possible path parameters are:</p>
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Path</th>
+            <th>Example parameters</th>
+            <th>Description</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>department</td>
+            <td>MATH, ECON, GOVT, CSCI</td>
+            <td>Returns a JSON array containing all courses offered in that Department. A list of proper Department ID's are located at the <a href="http://course-api.herokuapp.com/">root URL here. Generally they are a sensible 4-letter abbreviation of a Department.</a></th>
+         </tr>
+         <tr>
+            <td>course number</td>
+            <td>30, 50, 20, 5</td>
+            <td>Returns a JSON array containing all sections offered of that course. In general, you can figure out all the proper course numbers for a given department by first looking at a Department, and iterating over its <b>course</b> values.</td>
+         </tr>
+         <tr>
+            <td>section number</td>
+            <td>1, 2, 3</td>
+            <td>Returns a JSON array containing all courses in a particular department with that section number. In a sane world, this is a 1-element list, but the kind Registrars give us exceptions to that rule.</td>
+         </tr>
+      </tbody>
+    </table>
+
+    <p>Finally, each individual JSON object returned by any of the above API calls has the following format: </p>
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Key</th>
+            <th>Example value</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>reg_limit</td>
+            <td>"18 / 18"</td>
+         </tr>
+         <tr>
+            <td>campus</td>
+            <td>"CM"</td>
+         </tr>
+         <tr>
+            <td>end</td>
+            <td>"4:00pm"</td>
+         </tr>
+         <tr>
+            <td>course</td>
+            <td>"GOVT020"</td>
+         </tr>
+         <tr>
+            <td>status</td>
+            <td>"Closed"</td>
+         </tr>
+         <tr>
+            <td>hours</td>
+            <td>"1.00"</td>
+         </tr>
+         <tr>
+            <td>title</td>
+            <td>"Introduction to American Politics"</td>
+         </tr>
+         <tr>
+            <td>section</td>
+            <td>"01"</td>
+         </tr>
+         <tr>
+            <td>start</td>
+            <td>"2:45pm"</td>
+         </tr>
+         <tr>
+            <td>room</td>
+            <td>"103"</td>
+         </tr>
+         <tr>
+            <td>bldg</td>
+            <td>"RN"</td>
+         </tr>
+         <tr>
+            <td>instructor</td>
+            <td>"Miller K"</td>
+         </tr>
+         <tr>
+            <td>days</td>
+            <td>"MW"</td>
+         </tr>
+      </tbody>
+    </table>
+
+    <div id="dining" style="padding-top:50px">
+    <h3>5C Dining Public API</h3>
+    <p>
+    The dining data can be found here:</p>
+    <pre>http://dining-api.herokuapp.com/$DINING_HALL</pre>
+    <p>
+    This API allows you to query the food served by the 6 major dining halls in Claremont. The rteurn format is JSON. You can either request the root and then iterate over all dining halls, or use a single path parameter to specify certain dining halls:
+    <table class="table">
+      <thead>
+         <tr>
+            <th>Parameter</th>
+            <th>All possible values</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>Dining Hall ID</td>
+            <td>collins, pitzer, frary, frank, scripps, mudd, all</td>
+         </tr>
+      </tbody>
+    </table>
+    </p>
+  </br>
+    <p>The data returned by each route is a nested JSON object with the following format: </p>
+        <table class="table">
+      <thead>
+         <tr>
+            <th>Key</th>
+            <th>Example value</th>
+         </tr>
+      </thead>
+      <tbody>
+         <tr>
+            <td>"tue"</td>
+            <td>Maps to inner JSON object containing all meals</td>
+         </tr>
+          <tr>
+            <td>"dinner"</td>
+            <td>Maps to innermost JSON object containing all dishes served at that meal</td>
+         </tr>
+      </tbody>
+    </table>
+  </p>
+    </div>
+
+  <h3>Source Codez!</h3>
+    <p>The Courses API source code is available 
+    <a href="https://github.com/sean-adler/course-api">here</a>.
+    </p>
+
+  </br>
+
+    <p>And the Dining API source code is available
+    <a href="https://github.com/sean-adler/course-api">here</a>.
+    </p>
+
+    <p>Additionally, the source for an iPhone app using the 5C Dining API is at: 
+    <a href="https://github.com/sean-adler/5c-noms">github.com/sean-adler/5c-noms</a>.</p>
+
+Love, Sean
+
+
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+<br><br><br><br><br><br><br><br>
+
+    </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+      $(function() {
+         $('#mynavbar').scrollspy();
+      });
+    </script>
+
+  </body>
+</html>
